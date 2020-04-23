@@ -54,13 +54,13 @@ SP: BEGIN
 	/*SELECT STR_TO_DATE(pdFechaNacimiento,'%Y-%m-%d') INTO vcFechaNacimiento;*/
 	
 	IF pcTelefono <> '' THEN
-		INSERT INTO `Usuarios_Registrados`(`ID_Usuario`,`Nombre`,`Apellido`,`Numero_Telefono`,`Fecha_Nacimiento`,`Fecha_Suscripcion`,`Genero`,`Nombre_Usuario`,`Email`,`Password`)
-		VALUES (vnIdUsuario,pcNombre,pcApellido,pcTelefono,pdFechaNacimiento,CURRENT_DATE(),vcGenero,pcUsername,pcEmail,pcPassword);
+		INSERT INTO `Usuarios_Registrados`(`ID_Usuario`,`Nombre`,`Apellido`,`Numero_Telefono`,`Fecha_Nacimiento`,`Fecha_Suscripcion`,`Genero`,`Nombre_Usuario`,`Email`,`Password`,`Foto_Perfil`)
+		VALUES (vnIdUsuario,pcNombre,pcApellido,pcTelefono,pdFechaNacimiento,CURRENT_DATE(),vcGenero,pcUsername,pcEmail,pcPassword,NULL);
 		SET pnCodigoMensaje = 0;
 		SET pcMensaje = "Registro realizado con exito";
 	ELSE
-		INSERT INTO `Usuarios_Registrados`(`ID_Usuario`,`Nombre`,`Apellido`,`Numero_Telefono`,`Fecha_Nacimiento`,`Fecha_Suscripcion`,`Genero`,`Nombre_Usuario`,`Email`,`Password`)
-		VALUES (vnIdUsuario,pcNombre,pcApellido,NULL,pdFechaNacimiento,CURRENT_DATE(),vcGenero,pcUsername,pcEmail,pcPassword);
+		INSERT INTO `Usuarios_Registrados`(`ID_Usuario`,`Nombre`,`Apellido`,`Numero_Telefono`,`Fecha_Nacimiento`,`Fecha_Suscripcion`,`Genero`,`Nombre_Usuario`,`Email`,`Password`,`Foto_Perfil`)
+		VALUES (vnIdUsuario,pcNombre,pcApellido,NULL,pdFechaNacimiento,CURRENT_DATE(),vcGenero,pcUsername,pcEmail,pcPassword,NULL);
 		SET pnCodigoMensaje = 0;
 		SET pcMensaje = "Registro realizado con exito";
 	END IF;

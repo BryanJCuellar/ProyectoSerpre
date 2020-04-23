@@ -19,6 +19,7 @@ CREATE TABLE `id12846177_serprehn`.`Usuarios_Registrados` (
   `Nombre_Usuario` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
+  `Foto_Perfil` LONGBLOB NULL,
   CONSTRAINT `PK_Usuarios_Registrados` PRIMARY KEY (`ID_Usuario`),
   CONSTRAINT `CHK_GENERO` CHECK(`Genero` IN('M','F','N/A'))
  )
@@ -37,7 +38,7 @@ CREATE TABLE `id12846177_serprehn`.`Categoria_Servicio` (
 -- -----------------------------------------------------
 CREATE TABLE `id12846177_serprehn`.`Servicios_Publicados` (
   `ID_Servicio` INT NOT NULL,
-  `Imagen` BLOB NULL,
+  `Imagen` LONGBLOB NULL,
   `Nombre_Servicio` VARCHAR(45) NOT NULL,
   `Fecha_Publicacion` DATE NOT NULL,
   `Hora_Publicacion` TIME NOT NULL,
