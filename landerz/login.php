@@ -42,7 +42,7 @@
         </div>
         <div class="site-mobile-menu-body">
             <ul>
-                <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link">[Página Principal]</a></li>
+                <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
             </ul>
         </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="col-12 col-md-12 main-menu">
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu mr-auto d-none d-lg-block">
-                            <li><a href="index.php" class="font-16-weight nav-link">[Página Principal]</a></li>
+                            <li><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -86,10 +86,10 @@
                 </div><br>
                 <h3 class="text-center">Inicio de Sesión</h3><br>
                 <div class="div-form-login-registro">
-                    <input id="email-username" type="email" class="input-login-registro" placeholder="Email or Username">
+                    <input id="email-username" type="email" class="input-login-registro" placeholder="Email or Username" onkeypress="pulsar(event);">
                     <div id="Error-Login-email-username" class="error">Este campo es obligatorio</div>
                     <br><br>
-                    <input id="password" type="password" class="input-login-registro" placeholder="Password">
+                    <input id="password" type="password" class="input-login-registro" placeholder="Password" onkeypress="pulsar(event);">
                     <div id="Error-Login-password" class="error">Este campo es obligatorio</div>
                     <input id="chk-password" type="checkbox" onclick="mostrarContrasena('password');">&nbsp;Show Password
                     <br><br><br>
@@ -141,7 +141,8 @@
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/controladorLogin.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="js/controladorLogin.js?v=<?php echo time(); ?>"></script>
 
 </body>
 </html>

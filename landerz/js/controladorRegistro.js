@@ -1,6 +1,17 @@
 $(document).ready(function(){
     document.getElementById("chk-Password").checked=false;
 });
+// Funcion para activar evento onclick del boton Registrate cuando se pulsa la tecla Enter
+function pulsar(e){
+    //Activar cuando se pulse la tecla enter y que no se active con la tecla Shift
+    if (e.keyCode == 13 && !e.shiftKey) {
+        e.preventDefault();
+        var boton = document.getElementById("btn-registro");
+        angular.element(boton).triggerHandler('click');
+    }
+}
+
+// Funcion a la que se llama cuando damos click al boton Registrate para verificar si se ingresaron todos los campos requeridos
 function CamposRequeridosRegistro(){
     var campos = [
         {campo:'Nombre',valido:false},
@@ -34,7 +45,7 @@ function CamposRequeridosRegistro(){
     //En este punto significa que todo esta bien
     guardarRegistro();
 }
-
+// Funcion para verificar si el campo esta vacio o no
 function validarCampoVacioRegistro(id){
     if (document.getElementById(id).value == ''){
         document.getElementById('div-error-'+id).style.display = 'block';
@@ -46,6 +57,7 @@ function validarCampoVacioRegistro(id){
     return true;
 }
 
+//Funcion para guardar el registro cuando se tienen todos los campos requeridos, haciendo una peticion AJAX a registrar.php
 function guardarRegistro(){
     var valorGenero;
     if(document.getElementById("Male").checked){
@@ -84,6 +96,7 @@ function guardarRegistro(){
     })
 }
 
+// Funcion para mostrar contrasena dependiendo si se pulsa o no el input de tipo checkbox
 function mostrarContrasena(ID){
     var tipo = document.getElementById(ID);
     if (tipo.type == "password") {

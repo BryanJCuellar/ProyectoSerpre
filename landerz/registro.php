@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?php
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,8 +40,8 @@
         </div>
         <div class="site-mobile-menu-body">
                     <ul>
-                        <li style="list-style:none !important;"><a href="login.php#inicio-sesion" class="font-16-weight nav-link">[Iniciar Sesión]</a></li>
-                        <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link">[Página Principal]</a></li>
+                        <li style="list-style:none !important;"><a href="login.php#inicio-sesion" class="font-16-weight nav-link enlace-cursor-color">[Iniciar Sesión]</a></li>
+                        <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                     </ul>
         </div>
         </div>
@@ -67,8 +68,8 @@
                     <nav class="site-navigation position-relative text-right" role="navigation">
 
                     <ul class="site-menu main-menu mr-auto d-none d-lg-block">
-                        <li><a href="login.php#inicio-sesion" class="font-16-weight nav-link">[Iniciar Sesión]</a></li>
-                        <li><a href="index.php" class="font-16-weight nav-link">[Página Principal]</a></li>
+                        <li><a href="login.php#inicio-sesion" class="font-16-weight nav-link enlace-cursor-color">[Iniciar Sesión]</a></li>
+                        <li><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                     </ul>
                     </nav>
                 </div>
@@ -89,15 +90,15 @@
                 <div class="div-form-login-registro">
                     <label for="Nombre">Ingresar Nombre:</label>
                     <div id="div-error-Nombre" class="error">*Campo Requerido</div><br>
-                    <input id="Nombre" type="text" class="input-login-registro" placeholder="Nombre"><br><br>
+                    <input id="Nombre" type="text" class="input-login-registro" placeholder="Nombre" onkeypress="pulsar(event);"><br><br>
                     <label for="Apellido">Ingresar Apellido:</label>
                     <div id="div-error-Apellido" class="error">*Campo Requerido</div><br>
-                    <input id="Apellido" type="text" class="input-login-registro" placeholder="Apellido"><br><br>
+                    <input id="Apellido" type="text" class="input-login-registro" placeholder="Apellido" onkeypress="pulsar(event);"><br><br>
                     <label for="Telefono">Ingresar Numero Telefono: (Opcional)</label><br>
-                    <input id="Telefono" type="tel" class="input-login-registro" pattern="\([0-9]{3}\) [0-9]{4}[ -][0-9]{4}" placeholder="Número Telefono"><br><br>
+                    <input id="Telefono" type="tel" class="input-login-registro" pattern="\([0-9]{3}\) [0-9]{4}[ -][0-9]{4}" placeholder="Número Telefono" onkeypress="pulsar(event);"><br><br>
                     <label for="FechaNacimiento">Ingresar Fecha Nacimiento:</label>
                     <div id="div-error-FechaNacimiento" class="error">*Campo Requerido</div><br>
-                    <input id="FechaNacimiento" type="date" class="input-login-registro"><br><br>
+                    <input id="FechaNacimiento" type="date" class="input-login-registro" onkeypress="pulsar(event);"><br><br>
                     <label for="gender">Seleccione Género:</label>
                     <div id="div-error-Genero" class="error">*Campo Requerido</div><br>
                     <input id="Male" type="radio" name="gender" value="Masculino">&nbsp;Masculino <br>
@@ -106,13 +107,13 @@
                     <br>
                     <label for="Username">Nombre de Usuario:</label>
                     <div id="div-error-Username" class="error">*Campo Requerido</div><br>
-                    <input id="Username" type="text" class="input-login-registro" placeholder="Username"><br><br>
+                    <input id="Username" type="text" class="input-login-registro" placeholder="Username" onkeypress="pulsar(event);"><br><br>
                     <label for="Email">Ingresar Correo:</label>
                     <div id="div-error-Email" class="error">*Campo Requerido</div><br>
-                    <input id="Email" type="email" class="input-login-registro" placeholder="Email"><br><br>
+                    <input id="Email" type="email" class="input-login-registro" placeholder="Email" onkeypress="pulsar(event);"><br><br>
                     <label for="Password">Ingresar Contraseña:</label>
                     <div id="div-error-Password" class="error">*Campo Requerido</div><br>
-                    <input id="Password" type="password" class="input-login-registro" placeholder="Password"><br>
+                    <input id="Password" type="password" class="input-login-registro" placeholder="Password" onkeypress="pulsar(event);"><br>
                     <input id="chk-Password" type="checkbox" onclick="mostrarContrasena('Password');">&nbsp;Show Password
                     <br><br><br>
                     <div align="center">
@@ -148,6 +149,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!--<script src="js/sendEmail.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <!--<script src="js/popper.min.js"></script>
@@ -160,6 +162,6 @@
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/controladorRegistro.js"></script>
+    <script src="js/controladorRegistro.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

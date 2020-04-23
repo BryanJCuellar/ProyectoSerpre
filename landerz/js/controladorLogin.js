@@ -2,6 +2,17 @@ $(document).ready(function(){
     document.getElementById("chk-password").checked=false;
 });
 
+// Funcion para activar evento onclick del boton Iniciar Sesion cuando se pulsa la tecla Enter
+function pulsar(e){
+    //Activar cuando se pulse la tecla enter y que no se active con la tecla Shift
+    if (e.keyCode == 13 && !e.shiftKey) {
+        e.preventDefault();
+        var boton = document.getElementById("btn-login");
+        angular.element(boton).triggerHandler('click');
+    }
+}
+
+// Funcion a la que se llama cuando damos click al boton Iniciar Sesion para verificar si se ingresaron todos los campos requeridos
 function CamposRequeridosLogin(){
     var campos = [
         {campo:'email-username',valido:false},
@@ -21,6 +32,7 @@ function CamposRequeridosLogin(){
     guardarSesion();
 }
 
+// Funcion para verificar si el campo esta vacio o no
 function validarCampoVacioLogin(id){
     if (document.getElementById(id).value == ''){
         document.getElementById('Error-Login-'+id).style.display = 'block';
@@ -32,6 +44,7 @@ function validarCampoVacioLogin(id){
     return true;
 }
 
+//Funcion para verificar si el inicio de sesion es correcto, haciendo una peticion AJAX a loguear.php
 function guardarSesion(){
     var parametros = "";
     parametros = "nEmailUsername="+$('#email-username').val()+"&nPassword="+$('#password').val();
@@ -56,6 +69,7 @@ function guardarSesion(){
     })
 }
 
+// Funcion para mostrar contrasena dependiendo si se pulsa o no el input de tipo checkbox
 function mostrarContrasena(ID){
     var tipo = document.getElementById(ID);
     if (tipo.type == "password") {
