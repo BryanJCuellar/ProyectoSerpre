@@ -77,13 +77,17 @@
     padding: 2rem 0rem;
 }
 .div-contenido-servicios{
-    width:95%;
+    width:90%;
     margin-left:auto;
     margin-right:auto;
-    padding:2rem 4rem;
+    padding:2rem 0rem;
 }
+/*Colors*/
 .color-w{
     color:#f8f0f0;
+}
+.color-black{
+    color: #161616;
 }
 .color-green{
     color:#3D998D;
@@ -91,6 +95,48 @@
 .background-color-w{
     background-color:#f8f0f0 !important;
 }
+/*Mis Servicios*/
+.background-container-greenmint{
+    background-color: #6FE5D4;
+}
+.box-left{
+    /*float:left;*/
+    width:35%;
+    min-width:240px;
+    border-right:1px solid #f8f0f0;
+}
+.box-right{
+    /*float:right;*/
+    width:65%;
+    min-width:350px;
+}
+#imagen-perfil-misservicios{
+    width:85%;
+    max-width: 270px;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    height: 270px;
+    box-sizing:border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#misServicios{
+    width:95%;
+}
+.encabezado-imagen{
+    width: 100%;
+    height:220px;
+}
+.contenido-informacion{
+    background-color:#ffffff;
+    color:#141414;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:16px;
+}
+.titulo-servicio{
+    font-weight: bold;
+    font-size:18px;
+ }
 /*Fonts Size*/
 .font-s-16{
     font-size: 16px;
@@ -112,6 +158,13 @@
 .enlace-cursor-color:hover{
     color:#2ee1ee !important;
 }
+.anchor-custom{
+    color: #292727 !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.anchor-custom:hover{
+    color: #fff3ef !important;
+}
 
 /*Search*/
 .search{
@@ -128,14 +181,44 @@
 	padding: 0rem 0.5rem;
 	line-height:1;
 	text-align:left;
-	outline:0;
+    outline:0;
 }
 
 /**/
+@media (max-width: 1199px) {
+    /**/
+    #misServicios{
+        width:75%;
+    }
+    .encabezado-imagen{
+        height:290px;
+    }
+}
 
 @media (max-width: 991px) {
     .login-registro{
         width: 70%; 
+    }
+    /**/
+    .box-left{
+        margin-left: auto;
+        margin-right:auto;
+        width:100%;
+        float:none;
+        min-width: 0;
+    }
+    .box-right{
+        margin-left: auto;
+        margin-right:auto;
+        width:100%;
+        float:none;
+        min-width: 0;
+    }
+    #misServicios{
+        width:65%;
+    }
+    .encabezado-imagen{
+        height:300px;
     }
 }
 
@@ -146,6 +229,13 @@
     .div-form-login-registro{
         width:85%;
     }
+    /**/
+    #misServicios{
+        width:80%;
+    }
+    .encabezado-imagen{
+        height:300px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -155,7 +245,12 @@
     .div-form-login-registro{
         width:90%;
     }
-    .div-contenido-servicios{
+    /**/
+    #misServicios{
         width:100%;
     }
+    .encabezado-imagen{
+        height:260px;
+    }
+
 }

@@ -41,7 +41,7 @@
         <div class="site-mobile-menu-body">
                     <ul>
                         <li style="list-style:none !important;"><a href="login.php#inicio-sesion" class="font-16-weight nav-link enlace-cursor-color">[Iniciar Sesión]</a></li>
-                        <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                        <li style="list-style:none !important;"><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                     </ul>
         </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="container d-none d-lg-block">
         <div class="row">
             <div class="col-12 text-center mb-4 mt-5">
-                <h1 class="mb-0 site-logo"><a href="index.php" class="text-black h2 mb-0">
+                <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">
                     <img src="images/NewLogoSerpre.png" alt="LogoImage" class="img-logo-nav img-fluid">
                 </a></h1>
             </div>
@@ -61,7 +61,7 @@
                 <div class="row align-items-center">
                 
                 <div class="col-6 col-md-6 col-xl-2  d-block d-lg-none">
-                    <h1 class="mb-0 site-logo"><a href="index.php" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
+                    <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
                 </div>
 
                 <div class="col-12 col-md-12 main-menu">
@@ -69,7 +69,7 @@
 
                     <ul class="site-menu main-menu mr-auto d-none d-lg-block">
                         <li><a href="login.php#inicio-sesion" class="font-16-weight nav-link enlace-cursor-color">[Iniciar Sesión]</a></li>
-                        <li><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                        <li><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                     </ul>
                     </nav>
                 </div>

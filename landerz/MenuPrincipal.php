@@ -45,7 +45,7 @@
         <div class="site-mobile-menu-body">
             <ul>
                 <li style="list-style:none !important;"><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mi Perfil]</a></li>
-                <li style="list-style:none !important;"><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
+                <li style="list-style:none !important;"><a href="servicios/" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
                 <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                 <li style="list-style:none !important;"><a href="sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
             </ul>
@@ -55,7 +55,7 @@
         <div class="container d-none d-lg-block">
         <div class="row">
             <div class="col-12 text-center mb-4 mt-5">
-                <h1 class="mb-0 site-logo"><a href="index.php" class="text-black h2 mb-0">
+                <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">
                     <img src="images/NewLogoSerpre.png" alt="LogoImage" class="img-logo-nav img-fluid">
                 </a></h1>
             </div>
@@ -67,7 +67,7 @@
                 <div class="row align-items-center">
                 
                 <div class="col-6 col-md-6 col-xl-2  d-block d-lg-none">
-                    <h1 class="mb-0 site-logo"><a href="index.php" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
+                    <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
                 </div>
                 <div>
 
@@ -76,8 +76,8 @@
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu mr-auto d-none d-lg-block">
                             <li><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mi Perfil]</a></li>
-                            <li><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
-                            <li><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                            <li><a href="servicios/" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
+                            <li><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                             <li><a href="sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
                         </ul>
                     </nav>
@@ -98,7 +98,7 @@
                 <!--<div class="color-w font-s-20 my-5" align="right">-->
                     <!--<a id="publicarServicio" class="btn btn-info mr-2 mb-2" href = "#">Publica tu Servicio</a>-->
                 <!--</div>-->
-                <form class="color-w font-s-20 my-5" align="right" action="" method ="">
+                <form class="color-w font-s-20 my-5 mr-3" align="right" action="" method ="">
                         <input type="text" name="nombre" placeholder="Buscar" class="search"><span><a href="#" class="color-w enlace-cursor-color ml-2"><i class="fas fa-search"></i></a></span>
                 </form>
                 <div align="center"><h2 class="color-w">SERVICIOS: CATEGORIAS</h2></div>

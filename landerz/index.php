@@ -1,6 +1,6 @@
 <?php
-    include("conexionBD/conexion.php");
-    session_start();
+  include("conexionBD/conexion.php");
+  session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="css/aos.css">
 
-    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/style.css">
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -98,7 +98,7 @@
                 <p class="mb-5">
                   .</p>
                 <div>
-                  <?php
+                  <?php 
                     $inactivo = 900;
                     if (isset($_SESSION['user']) && $_SESSION["autentificado"] == "SI" && isset($_SESSION['tiempo'])){
                             $vida_session = time() - $_SESSION['tiempo'];
