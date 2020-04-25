@@ -5,7 +5,7 @@ CREATE PROCEDURE SP_PUBLICAR_SERVICIO(
 					IN plbImagen LONGBLOB,
 					IN pcDescripcion VARCHAR(1000),
 					IN pnPrecio FLOAT,
-					IN pcMoneda VARCHAR(10)
+					IN pcMoneda VARCHAR(10),
 					OUT pnCodigoMensaje INT,
 					OUT pcMensaje VARCHAR(1000)
 				)
