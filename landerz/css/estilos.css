@@ -48,7 +48,7 @@
     padding-left: inherit;
 }*/
 
-/*Class de los botones login y signup*/
+/*Class de los botones login signup publicar*/
 .boton-login{
     width:60%;
     margin-left:auto !important;
@@ -123,6 +123,22 @@
 #misServicios{
     width:95%;
 }
+.span-disponibilidad{
+    background-color: #302b2b80;
+    width:40%;
+    color:#ffffff;
+    font-size:16px;
+    border-radius: 3px;
+    font-weight: bold;
+    position: absolute; /*importante*/
+    padding:3px;
+    text-shadow:0 0 15px white;
+    text-align:center;
+    /*margin:5px 0px 0px 5px;*/
+    top:0;
+    display: block;/*importante si primero va la img luego el span*/
+
+}
 .encabezado-imagen{
     width: 100%;
     height:220px;
@@ -137,6 +153,29 @@
     font-weight: bold;
     font-size:18px;
  }
+ /*Formulario publicar servicio*/
+ .form-publish{
+    background-color:#FFFFFF !important;
+    width: 90%;
+    min-width: 300px;
+    height: auto;
+    margin-left:auto;
+    margin-right:auto;
+    border: 4px solid #b9b5b5;
+    padding: 3rem 1rem !important;
+}
+.form-inner-publish{
+    width:100%;
+    font-size:18px;
+}
+.error-form{
+    color: #ce0808;
+    padding: 2px 0px 0px 0px;
+    font-size: 14px;
+    border-radius: 4px;
+    width: fit-content;
+    display:block;
+}
 /*Fonts Size*/
 .font-s-16{
     font-size: 16px;
@@ -196,22 +235,22 @@
 }
 
 @media (max-width: 991px) {
-    .login-registro{
+    .login-registro {
         width: 70%; 
     }
     /**/
     .box-left{
         margin-left: auto;
         margin-right:auto;
+        border-right:0;
+        border-bottom:1px solid #f8f0f0;
         width:100%;
-        float:none;
         min-width: 0;
     }
     .box-right{
         margin-left: auto;
         margin-right:auto;
         width:100%;
-        float:none;
         min-width: 0;
     }
     #misServicios{
@@ -219,6 +258,10 @@
     }
     .encabezado-imagen{
         height:300px;
+    }
+    .form-publish{
+        width: 60%;
+        padding: 3rem 3rem !important;
     }
 }
 
@@ -236,6 +279,10 @@
     .encabezado-imagen{
         height:300px;
     }
+    .form-publish{
+        width: 80%;
+        padding: 3rem 2rem !important;
+    }
 }
 
 @media (max-width: 575px) {
@@ -252,5 +299,7 @@
     .encabezado-imagen{
         height:260px;
     }
-
+    .form-publish{
+        padding: 3rem 1rem !important;
+    }
 }
