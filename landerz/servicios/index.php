@@ -2,7 +2,7 @@
     include("../conexionBD/conexion.php");
     //Seguridad Sesion
     session_start(); 
-    $inactivo = 3600;
+    $inactivo = 900;
     if (!isset($_SESSION['user'])){
         header("Location: ../login.php");
     }else{
