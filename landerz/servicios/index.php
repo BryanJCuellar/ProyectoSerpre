@@ -19,11 +19,12 @@
         }        
         $_SESSION['tiempo'] = time();
     }
+    $usuario = $_SESSION['user'];
     // Formulario publicar servicio submit
     // Definimos las variables
     //echo '<script language="javascript">alert("Afuera del request");</script>';
     $categoriaErr = $nombreErr = $archivoErr = $descripcionErr = $precioErr = "";
-    $categoria = $nombre = $archivo = $descripcion = $precio = $moneda = "";
+    $idCategoria = $nombre = $cargarArchivo = $descripcion = $precio = $moneda = "";
     $anexarCampos = "";
     $maxsize = 2048; //2 MB
     //Condicion para el form de method POST
@@ -31,18 +32,46 @@
         if(isset($_POST["categoria-servicio"]) && isset($_POST["nombre-servicio"]) && 
         file_exists($_FILES['imagen-servicio']['tmp_name']) && isset($_POST["descripcion-servicio"]) && 
         isset($_POST["precio-servicio"]) && isset($_POST["tipo-moneda"])){
-            $categoria = $_POST["categoria-servicio"];
+            $idCategoria = $_POST["categoria-servicio"];
             $nombre = $_POST["nombre-servicio"];
-            $archivo = $_FILES['imagen-servicio']['tmp_name'];
+            $cargarArchivo = $_FILES['imagen-servicio']['tmp_name'];
+            $archivo = fopen($cargarArchivo,'rb'); // Leer como binario
             $descripcion = $_POST["descripcion-servicio"];
             $precio = $_POST["precio-servicio"];
             $moneda = $_POST["tipo-moneda"];
-            $tipoImagen = exif_imagetype($archivo);
+            $tipoImagen = exif_imagetype($cargarArchivo);
+
+            $conexion = getPDO();
             if(is_numeric($precio) && ($tipoImagen == IMAGETYPE_JPEG || $tipoImagen == IMAGETYPE_PNG) && $_FILES["imagen-servicio"]["size"] < 1024 * $maxsize){
                 $precio = number_format($precio, 2, '.', '');
                 $precio = (float)$precio;
-                //echo '<script language="javascript">alert("Datos correctos '.$tipoImagen.'")</script>';
+                if($conexion){
+                    // Llamada a procedimiento almacenado
+                    $procedimientoPublicar = 'CALL SP_PUBLICAR_SERVICIO(:pcUsername,:pnIdCategoria,:pcNombreServicio,:plbImagen,:pcDescripcion,:pnPrecio,:pcMoneda,@codigoMensaje,@mensaje)';
+                    $insertarServicio = $conexion->prepare($procedimientoPublicar);
+                    $insertarServicio->bindParam(':pcUsername', $usuario, PDO::PARAM_STR, 45);
+                    $insertarServicio->bindParam(':pnIdCategoria', $idCategoria, PDO::PARAM_INT);
+                    $insertarServicio->bindParam(':pcNombreServicio', $nombre, PDO::PARAM_STR, 90);
+                    $insertarServicio->bindParam(':plbImagen', $archivo, PDO::PARAM_LOB);
+                    $insertarServicio->bindParam(':pcDescripcion', $descripcion, PDO::PARAM_STR, 1000);
+                    $insertarServicio->bindParam(':pnPrecio', $precio, PDO::PARAM_STR);
+                    $insertarServicio->bindParam(':pcMoneda', $moneda, PDO::PARAM_STR,10);
+                    $insertarServicio->execute();
 
+                    $insertarServicio->closeCursor(); //permite limpiar y ejecutar la segunda query
+                    $salidaSP = '';
+                    $salidaSP = $conexion->query("SELECT @codigoMensaje AS pnCodigoMensaje,@mensaje AS pcMensaje")->fetch(PDO::FETCH_ASSOC);
+                    if($salidaSP['pnCodigoMensaje']==0){
+                        echo '<script language="javascript">alert("'.$salidaSP['pcMensaje'].'")</script>';
+                    }else{
+                        echo '<script language="javascript">alert("Ocurrio un error: "'.$salidaSP['pcMensaje'].'")</script>';
+                    }
+                }else{
+                    echo '<script language="javascript">alert("Hubo un problema con la conexión a la BD")</script>';
+                }
+
+                //echo '<script language="javascript">alert("Datos correctos '.$tipoImagen.'")</script>';
+                
             }else if(!is_numeric($precio)){
                 echo '<script language="javascript">alert("Ingresar valor numérico en campo Precio: '.$precio.' no es numérico");</script>';
                 $precioErr = "Se requiere valor numérico";
@@ -174,7 +203,7 @@
                     <div id="imagen-perfil-misservicios" class="mx-auto img-fluid" style="background-image: url(../images/Anonymous.png);"></div>
                     <!--<img id="imagen-perfil-misservicios" class="mx-auto img-fluid" src="../images/Anonymous.png" alt="Imagen Perfil">-->
                     <?php
-                        echo '<div class="mt-3 mb-5" align="center"><h4 class="color-black"><b>Usuario: '.$_SESSION['user'].'</b></h4></div>';
+                        echo '<div class="mt-3 mb-5" align="center"><h4 class="color-black"><b>Usuario: '.$usuario.'</b></h4></div>';
                     ?>
                     <div id="div-link-publish" class="mb-2" align="center"><a class="anchor-custom font-s-20" onclick="mostrarFormularioPublicarServicio();" ><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Publicar un nuevo servicio</a></div>
                     <!--Formulario de publicar servicio-->
@@ -187,15 +216,15 @@
                                 <option value="">Seleccionar</option>
                                 <!--Consulta para obtener categorias de servicio-->
                                 <?php
-                                    $pdo = getPDO();
-                                    if($pdo){
-                                        $listcategoria = $pdo->query("SELECT ID_Categoria_Servicio,Nombre_Categoria FROM Categoria_Servicio");
+                                    $conexion = getPDO();
+                                    if($conexion){
+                                        $listcategoria = $conexion->query("SELECT ID_Categoria_Servicio,Nombre_Categoria FROM Categoria_Servicio");
                                         while($filaCategoria=$listcategoria->fetch(PDO::FETCH_ASSOC)){
                                             echo '<option value="'.$filaCategoria['ID_Categoria_Servicio'].'">'.$filaCategoria['Nombre_Categoria'].'</option>';
                                         }
 
                                     } else {
-                                        echo "Hubo un problema con la conexión";
+                                        echo '<option value="">Hubo un problema con la conexión a la BD</option>';
                                     }
                                 ?>
                             </select>

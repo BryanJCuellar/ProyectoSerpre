@@ -15,6 +15,7 @@ SP: BEGIN
 	DECLARE vcDisponible CHAR(1);
 	SET pnCodigoMensaje = 1;
 	SET pcMensaje = "";
+	SET vcResumenDescripcion = "";
 	SET vcDisponible = 'V';
 	/*Obtener el ID_Usuario*/
 	SELECT ID_Usuario INTO vnIdUsuarioPublicar FROM Usuarios_Registrados
@@ -29,7 +30,7 @@ SP: BEGIN
 	END IF;
 	
 	/*Campo Resumen_Descripcion*/
-	SELECT SUBSTRING(pcDescripcion,1,120) INTO vcResumenDescripcion FROM Servicios_Publicados;
+	SELECT SUBSTRING(pcDescripcion,1,120) AS Resumen INTO vcResumenDescripcion;
 	
 	/*Evitar que el usuario pueda repetir la informacion debido al form resubmission*/
 	/*Que no se repita un servicio con mismo nombre,categoria,usuario y descripcion*/
