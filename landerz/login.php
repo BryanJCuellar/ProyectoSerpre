@@ -86,10 +86,10 @@
                 </div><br>
                 <h3 class="text-center">Inicio de Sesión</h3><br>
                 <div class="div-form-login-registro">
-                    <input id="email-username" type="email" class="input-login-registro" placeholder="Email or Username" onkeypress="pulsar(event);">
+                    <input id="email-username" type="email" class="input-login-registro" placeholder="Email or Username" maxlength="45" onkeypress="pulsar(event);">
                     <div id="Error-Login-email-username" class="error">Este campo es obligatorio</div>
                     <br><br>
-                    <input id="password" type="password" class="input-login-registro" placeholder="Password" onkeypress="pulsar(event);">
+                    <input id="password" type="password" class="input-login-registro" placeholder="Password" maxlength="45" onkeypress="pulsar(event);">
                     <div id="Error-Login-password" class="error">Este campo es obligatorio</div>
                     <input id="chk-password" type="checkbox" onclick="mostrarContrasena('password');">&nbsp;Show Password
                     <br><br><br>

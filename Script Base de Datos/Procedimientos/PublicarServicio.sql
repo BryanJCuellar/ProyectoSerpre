@@ -12,11 +12,11 @@ CREATE PROCEDURE SP_PUBLICAR_SERVICIO(
 SP: BEGIN
 	DECLARE vnIdUsuarioPublicar,vnIdServicio,vnConteoIDServicio,vnConteoTemp INT;
 	DECLARE vcResumenDescripcion VARCHAR(120);
-	DECLARE vcDisponible CHAR(1);
+	DECLARE vcDisponible VARCHAR(20);
 	SET pnCodigoMensaje = 1;
 	SET pcMensaje = "";
 	SET vcResumenDescripcion = "";
-	SET vcDisponible = 'V';
+	SET vcDisponible = "Disponible";
 	/*Obtener el ID_Usuario*/
 	SELECT ID_Usuario INTO vnIdUsuarioPublicar FROM Usuarios_Registrados
 	WHERE Nombre_Usuario = pcUsername;
@@ -44,7 +44,7 @@ SP: BEGIN
 	END IF;
 	
 	/*Todo esta bien para insertar en este punto*/
-	INSERT INTO `Servicios_Publicados`(`ID_Servicio`,`Imagen`,`Nombre_Servicio`,`Fecha_Publicacion`,`Hora_Publicacion`,`Resumen_Descripcion`,`Detalle_Descripcion`,`Precio`,`Moneda`,`Disponible`,`ID_Usuario_Publicador`,`ID_Categoria_Servicio`) 
+	INSERT INTO `Servicios_Publicados`(`ID_Servicio`,`Imagen`,`Nombre_Servicio`,`Fecha_Publicacion`,`Hora_Publicacion`,`Resumen_Descripcion`,`Detalle_Descripcion`,`Precio`,`Moneda`,`Disponibilidad`,`ID_Usuario_Publicador`,`ID_Categoria_Servicio`) 
 	VALUES(vnIdServicio,plbImagen,pcNombreServicio,CURRENT_DATE(),CURRENT_TIME(),vcResumenDescripcion,pcDescripcion,pnPrecio,pcMoneda,vcDisponible,vnIdUsuarioPublicar,pnIdCategoria);
 	SET pnCodigoMensaje = 0;
 	SET pcMensaje = "Servicio publicado con exito";

@@ -46,11 +46,10 @@ CREATE TABLE `id12846177_serprehn`.`Servicios_Publicados` (
   `Detalle_Descripcion` VARCHAR(1000) NULL,
   `Precio` FLOAT NULL,
   `Moneda` VARCHAR(20) NULL,
-  `Disponible` CHAR(1) NOT NULL,
+  `Disponibilidad` VARCHAR(20) NOT NULL,
   `ID_Usuario_Publicador` INT NOT NULL,
   `ID_Categoria_Servicio` INT NOT NULL,
   CONSTRAINT `PK_Servicios_Publicados` PRIMARY KEY (`ID_Servicio`),
-  CONSTRAINT `CHK_DISPONIBLE` CHECK(`Disponible` IN('V','F')),
   INDEX `fk_Servicios_Publicados_Usuarios_Registrados1_idx` (`ID_Usuario_Publicador` ASC),
   INDEX `fk_Servicios_Publicados_Categoria_Servicio1_idx` (`ID_Categoria_Servicio` ASC),
   CONSTRAINT `fk_Servicios_Publicados_Usuarios_Registrados1`
