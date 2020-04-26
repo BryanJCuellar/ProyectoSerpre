@@ -42,7 +42,6 @@ CREATE TABLE `id12846177_serprehn`.`Servicios_Publicados` (
   `Nombre_Servicio` VARCHAR(90) NOT NULL,
   `Fecha_Publicacion` DATE NOT NULL,
   `Hora_Publicacion` TIME NOT NULL,
-  `Resumen_Descripcion` VARCHAR(120) NULL,
   `Detalle_Descripcion` VARCHAR(1000) NULL,
   `Precio` FLOAT NULL,
   `Moneda` VARCHAR(20) NULL,

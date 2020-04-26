@@ -1,5 +1,5 @@
 /*$(document).ready(function(){
-    
+    linkCategoria();
 });*/
 
 // Funcion para mostrar el formulario de publicar servicio
@@ -20,3 +20,79 @@ function ocultarFormularioPublicarServicio(){
     $("#id-form-publish").hide(500);
 }
 
+//Funciones para ocultar y mostrar categorias
+//Cursos
+function mostrarCursos(){
+    $("#div-link-cursos").empty();
+    $("#div-link-cursos").append(`
+        <a onclick="ocultarCursos();" class="anchor-custom font-s-24"><i class="fas fa-sort-down"></i>&nbsp;&nbsp;Cursos</a>
+    `);
+    $("#div-cursos").show(500);
+}
+function ocultarCursos(){
+    $("#div-link-cursos").empty();
+    $("#div-link-cursos").append(`
+        <a onclick="mostrarCursos();"  class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Cursos</a>
+    `);
+    $("#div-cursos").hide(500);
+}
+//Tutorias
+function mostrarTutorias(){
+    $("#div-link-tutorias").empty();
+    $("#div-link-tutorias").append(`
+        <a onclick="ocultarTutorias();" class="anchor-custom font-s-24"><i class="fas fa-sort-down"></i>&nbsp;&nbsp;Tutorias</a>
+    `);
+    $("#div-tutorias").show(500);
+}
+function ocultarTutorias(){
+    $("#div-link-tutorias").empty();
+    $("#div-link-tutorias").append(`
+        <a onclick="mostrarTutorias();"  class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Tutorias</a>
+    `);
+    $("#div-tutorias").hide(500);
+}
+//Articulos
+function mostrarArticulos(){
+    $("#div-link-articulos").empty();
+    $("#div-link-articulos").append(`
+        <a onclick="ocultarArticulos();" class="anchor-custom font-s-24"><i class="fas fa-sort-down"></i>&nbsp;&nbsp;Articulos de segunda mano</a>
+    `);
+    $("#div-articulos").show(500);
+}
+function ocultarArticulos(){
+    $("#div-link-articulos").empty();
+    $("#div-link-articulos").append(`
+        <a onclick="mostrarArticulos();"  class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Articulos de segunda mano</a>
+    `);
+    $("#div-articulos").hide(500);
+}
+//Eventos
+function mostrarEventos(){
+    $("#div-link-eventos").empty();
+    $("#div-link-eventos").append(`
+        <a onclick="ocultarEventos();" class="anchor-custom font-s-24"><i class="fas fa-sort-down"></i>&nbsp;&nbsp;Eventos</a>
+    `);
+    $("#div-eventos").show(500);
+}
+function ocultarEventos(){
+    $("#div-link-eventos").empty();
+    $("#div-link-eventos").append(`
+        <a onclick="mostrarEventos();"  class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Eventos</a>
+    `);
+    $("#div-eventos").hide(500);
+}
+//Reparaciones
+function mostrarReparaciones(){
+    $("#div-link-reparaciones").empty();
+    $("#div-link-reparaciones").append(`
+        <a onclick="ocultarReparaciones();" class="anchor-custom font-s-24"><i class="fas fa-sort-down"></i>&nbsp;&nbsp;Reparaciones</a>
+    `);
+    $("#div-reparaciones").show(500);
+}
+function ocultarReparaciones(){
+    $("#div-link-reparaciones").empty();
+    $("#div-link-reparaciones").append(`
+        <a onclick="mostrarReparaciones();"  class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Reparaciones</a>
+    `);
+    $("#div-reparaciones").hide(500);
+}

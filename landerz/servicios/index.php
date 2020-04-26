@@ -20,13 +20,21 @@
         $_SESSION['tiempo'] = time();
     }
     $usuario = $_SESSION['user'];
+    // Obtener idUsuario
+    $pdo = getPDO();
+    if($pdo){
+        $consulta = $pdo->query('SELECT ID_Usuario FROM Usuarios_Registrados WHERE Nombre_Usuario = "'.$usuario.'"')->fetch(PDO::FETCH_ASSOC);
+        $idUsuario = $consulta['ID_Usuario'];
+    }else{
+        echo "Hubo un problema con la conexion";
+    }
     // Formulario publicar servicio submit
     // Definimos las variables
     //echo '<script language="javascript">alert("Afuera del request");</script>';
     $categoriaErr = $nombreErr = $archivoErr = $descripcionErr = $precioErr = "";
     $idCategoria = $nombre = $cargarArchivo = $descripcion = $precio = $moneda = "";
     $anexarCampos = "";
-    $maxsize = 2048; //2 MB
+    $maxsize = 1536; //1.5 MB
     //Condicion para el form de method POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_POST["categoria-servicio"]) && isset($_POST["nombre-servicio"]) && 
@@ -76,7 +84,7 @@
                 echo '<script language="javascript">alert("Ingresar valor numérico en campo Precio: '.$precio.' no es numérico");</script>';
                 $precioErr = "Se requiere valor numérico";
             }else if($_FILES["imagen-servicio"]["size"] >= 1024 * $maxsize){
-                echo '<script language="javascript">alert("La imagen debe ser menor a 2 MB");</script>';
+                echo '<script language="javascript">alert("La imagen debe ser menor a 1.5 MB");</script>';
             }else if($tipoImagen != IMAGETYPE_JPEG && $tipoImagen != IMAGETYPE_PNG){
                 echo '<script language="javascript">alert("Formato de imagen no valido");</script>';
             }else{
@@ -230,13 +238,13 @@
                             </select>
                             <label for="nombre-servicio" class="color-black ml-1"><b>Nombre del Servicio:</b></label>
                             <div class="error-form mb-1"><?php echo $nombreErr; ?></div>
-                            <input name="nombre-servicio" type="text" class="form-control mb-3" placeholder="Nombre">
+                            <input name="nombre-servicio" type="text" class="form-control mb-3" placeholder="Nombre" maxlength="90">
                             <label for="imagen-servicio" class="color-black ml-1"><b>Subir Imagen del Servicio: (Formato PNG o JPG)</b></label>
                             <div class="error-form mb-1"><?php echo $archivoErr; ?></div>
                             <input name="imagen-servicio" type="file" class="form-control mb-3" accept="image/*">
-                            <label for="descripcion-servicio" class="color-black ml-1"><b>Descripción del Servicio:</b></label>
+                            <label for="descripcion-servicio" class="color-black ml-1"><b>Descripción del Servicio: (Máx. 500 caracteres)</b></label>
                             <div class="error-form mb-1"><?php echo $descripcionErr; ?></div>
-                            <textarea name="descripcion-servicio" class="form-control mb-3" rows="5"></textarea>
+                            <textarea name="descripcion-servicio" class="form-control mb-3" rows="5" maxlength="500"></textarea>
                             <label for="precio-servicio" class="color-black ml-1"><b>Precio:</b>
                             <div class="error-form mb-1"><?php echo $precioErr; ?></div>
                             <input name="precio-servicio" type="text" class="form-control mb-3" placeholder="Precio"></label>
@@ -254,45 +262,235 @@
                 <!--Parte Derecha-->
                 <div class="box-right px-1 py-5">
                     <div align="center" class="pb-5"><h2 class="color-black"><b>Mis Servicios</b></h2></div>
-                    <div class="row mx-auto" id="misServicios">
+                    <?php
+                        //Conteo servicios
+                        $conexion = getPDO();
+                        $cadenaResumen = '';
+                        $contadorCaracteres = 0;
+                        if($conexion){
+                            $cantidadServicios = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                            WHERE ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                            if($cantidadServicios['Cantidad']>0){
+                                //Cursos
+                                $cantidadCursos = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                WHERE ID_Categoria_Servicio = 1 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                                if($cantidadCursos['Cantidad']>0){
+                                    echo '<div id="div-link-cursos" class="mb-4 ml-5" align="left"><a onclick="mostrarCursos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Cursos</b></a></div>
+                                        <div id="div-cursos" class="row misServicios mx-auto" style="display:none;">
+                                        ';
+                                    $listCursos = $conexion->query("SELECT * FROM Servicios_Publicados 
+                                    WHERE ID_Categoria_Servicio = 1 AND ID_Usuario_Publicador = $idUsuario
+                                    ORDER BY Fecha_Publicacion,Hora_Publicacion");
+                                    while($filaCurso=$listCursos->fetch(PDO::FETCH_ASSOC)){
+                                        echo '
+                                        <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div><img src="data:image/png;base64, '.base64_encode($filaCurso['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaCurso['Disponibilidad'].'</span></div>
+                                            <div class="contenido-informacion px-3 py-2">
+                                                <div class="titulo-servicio my-1">'.$filaCurso['Nombre_Servicio'].'</div>';
+                                        $contadorCaracteres = strlen($filaCurso['Detalle_Descripcion']);
+                                        if($contadorCaracteres>120){
+                                            $cadenaResumen = substr($filaCurso['Detalle_Descripcion'],0,120)." ...";
+                                            echo '<div id="modificarDescripcion">
+                                                    <div class="descripcion-servicio">'.$cadenaResumen.'</div>
+                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                </div>';
+                                        }else{
+                                            echo '<div class="descripcion-servicio">'.$filaCurso['Detalle_Descripcion'].'</div>';      
+                                        }
+                                        if($filaCurso['Moneda'] == "$"){
+                                            echo '<div class="precio font-s-24 my-1">'.$filaCurso['Moneda']." ".$filaCurso['Precio'].'</div>';
+                                        }else{
+                                            echo '<div class="precio font-s-24 my-1">'.$filaCurso['Precio']." ".$filaCurso['Moneda'].'</div>';
+                                        }
+                                            echo '<div class="font-s-14 mb-1">Publicado el '.$filaCurso['Fecha_Publicacion'].'</div>
+                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '</div>';
+                                }//Fin Cursos
+                                //Tutorias
+                                $cantidadTutorias = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                WHERE ID_Categoria_Servicio = 2 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                                if($cantidadTutorias['Cantidad']>0){
+                                    echo '<div id="div-link-tutorias" class="mb-4 ml-5" align="left"><a onclick="mostrarTutorias();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Tutorias</b></a></div>
+                                        <div id="div-tutorias" class="row misServicios mx-auto" style="display:none;">
+                                        ';
+                                    $listTutorias = $conexion->query("SELECT * FROM Servicios_Publicados 
+                                    WHERE ID_Categoria_Servicio = 2 AND ID_Usuario_Publicador = $idUsuario 
+                                    ORDER BY Fecha_Publicacion,Hora_Publicacion");
+                                    while($filaTutoria=$listTutorias->fetch(PDO::FETCH_ASSOC)){
+                                        echo '
+                                        <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div><img src="data:image/png;base64, '.base64_encode($filaTutoria['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaTutoria['Disponibilidad'].'</span></div>
+                                            <div class="contenido-informacion px-3 py-2">
+                                                <div class="titulo-servicio my-1">'.$filaTutoria['Nombre_Servicio'].'</div>';
+                                        $contadorCaracteres = strlen($filaTutoria['Detalle_Descripcion']);
+                                        if($contadorCaracteres>120){
+                                            $cadenaResumen = substr($filaTutoria['Detalle_Descripcion'],0,120)." ...";
+                                            echo '<div id="modificarDescripcion">
+                                                    <div class="descripcion-servicio">'.$cadenaResumen.'</div>
+                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                </div>';
+                                        }else{
+                                            echo '<div class="descripcion-servicio">'.$filaTutoria['Detalle_Descripcion'].'</div>';      
+                                        }
+                                        if($filaTutoria['Moneda'] == "$"){
+                                            echo '<div class="precio font-s-24 my-1">'.$filaTutoria['Moneda']." ".$filaTutoria['Precio'].'</div>';
+                                        }else{
+                                            echo '<div class="precio font-s-24 my-1">'.$filaTutoria['Precio']." ".$filaTutoria['Moneda'].'</div>';
+                                        }
+                                            echo '<div class="font-s-14 mb-1">Publicado el '.$filaTutoria['Fecha_Publicacion'].'</div>
+                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '</div>';
+                                    
+                                }//Fin Tutorias
+                                //Articulos de segunda mano
+                                $cantidadArticulos = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                WHERE ID_Categoria_Servicio = 3 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                                if($cantidadArticulos['Cantidad']>0){
+                                    echo '<div id="div-link-articulos" class="mb-4 ml-5" align="left"><a onclick="mostrarArticulos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Articulos de segunda mano</b></a></div>
+                                        <div id="div-articulos" class="row misServicios mx-auto" style="display:none;">
+                                        ';
+                                    $listArticulos = $conexion->query("SELECT * FROM Servicios_Publicados 
+                                    WHERE ID_Categoria_Servicio = 3 AND ID_Usuario_Publicador = $idUsuario 
+                                    ORDER BY Fecha_Publicacion,Hora_Publicacion");
+                                    while($filaArticulo=$listArticulos->fetch(PDO::FETCH_ASSOC)){
+                                        echo '
+                                        <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div><img src="data:image/png;base64, '.base64_encode($filaArticulo['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaArticulo['Disponibilidad'].'</span></div>
+                                            <div class="contenido-informacion px-3 py-2">
+                                                <div class="titulo-servicio my-1">'.$filaArticulo['Nombre_Servicio'].'</div>';
+                                        $contadorCaracteres = strlen($filaArticulo['Detalle_Descripcion']);
+                                        if($contadorCaracteres>120){
+                                            $cadenaResumen = substr($filaArticulo['Detalle_Descripcion'],0,120)." ...";
+                                            echo '<div id="modificarDescripcion">
+                                                    <div class="descripcion-servicio">'.$cadenaResumen.'</div>
+                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                </div>';
+                                        }else{
+                                            echo '<div class="descripcion-servicio">'.$filaArticulo['Detalle_Descripcion'].'</div>';      
+                                        }
+                                        if($filaArticulo['Moneda'] == "$"){
+                                            echo '<div class="precio font-s-24 my-1">'.$filaArticulo['Moneda']." ".$filaArticulo['Precio'].'</div>';
+                                        }else{
+                                            echo '<div class="precio font-s-24 my-1">'.$filaArticulo['Precio']." ".$filaArticulo['Moneda'].'</div>';
+                                        }
+                                            echo '<div class="font-s-14 mb-1">Publicado el '.$filaArticulo['Fecha_Publicacion'].'</div>
+                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '</div>';
+                                    
+                                }//Fin Articulos de segunda mano
+                                //Eventos
+                                $cantidadEventos = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                WHERE ID_Categoria_Servicio = 4 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                                if($cantidadEventos['Cantidad']>0){
+                                    echo '<div id="div-link-eventos" class="mb-4 ml-5" align="left"><a onclick="mostrarEventos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Eventos</b></a></div>
+                                        <div id="div-eventos" class="row misServicios mx-auto" style="display:none;">
+                                        ';
+                                    $listEventos = $conexion->query("SELECT * FROM Servicios_Publicados 
+                                    WHERE ID_Categoria_Servicio = 4 AND ID_Usuario_Publicador = $idUsuario 
+                                    ORDER BY Fecha_Publicacion,Hora_Publicacion");
+                                    while($filaEvento=$listEventos->fetch(PDO::FETCH_ASSOC)){
+                                        echo '
+                                        <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div><img src="data:image/png;base64, '.base64_encode($filaEvento['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaEvento['Disponibilidad'].'</span></div>
+                                            <div class="contenido-informacion px-3 py-2">
+                                                <div class="titulo-servicio my-1">'.$filaEvento['Nombre_Servicio'].'</div>';
+                                        $contadorCaracteres = strlen($filaEvento['Detalle_Descripcion']);
+                                        if($contadorCaracteres>120){
+                                            $cadenaResumen = substr($filaEvento['Detalle_Descripcion'],0,120)." ...";
+                                            echo '<div id="modificarDescripcion">
+                                                    <div class="descripcion-servicio">'.$cadenaResumen.'</div>
+                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                </div>';
+                                        }else{
+                                            echo '<div class="descripcion-servicio">'.$filaEvento['Detalle_Descripcion'].'</div>';      
+                                        }
+                                        if($filaEvento['Moneda'] == "$"){
+                                            echo '<div class="precio font-s-24 my-1">'.$filaEvento['Moneda']." ".$filaEvento['Precio'].'</div>';
+                                        }else{
+                                            echo '<div class="precio font-s-24 my-1">'.$filaEvento['Precio']." ".$filaEvento['Moneda'].'</div>';
+                                        }
+                                            echo '<div class="font-s-14 mb-1">Publicado el '.$filaEvento['Fecha_Publicacion'].'</div>
+                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '</div>';
+                                    
+                                }// Fin Eventos
+                                //Reparaciones
+                                $pdo = getPDO();
+                                $cantidadReparaciones = $pdo->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
+                                if($cantidadReparaciones['Cantidad']>0){
+                                    echo '<div id="div-link-reparaciones" class="mb-4 ml-5" align="left"><a onclick="mostrarReparaciones();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Reparaciones</b></a></div>
+                                        <div id="div-reparaciones" class="row misServicios mx-auto" style="display:none;">
+                                        ';
+                                    $listReparaciones = $pdo->query("SELECT * FROM Servicios_Publicados 
+                                    WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario 
+                                    ORDER BY Fecha_Publicacion,Hora_Publicacion");
+                                    while($filaReparacion=$listReparaciones->fetch(PDO::FETCH_ASSOC)){
+                                        echo '
+                                        <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div><img src="data:image/png;base64, '.base64_encode($filaReparacion['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaReparacion['Disponibilidad'].'</span></div>
+                                            <div class="contenido-informacion px-3 py-2">
+                                                <div class="titulo-servicio my-1">'.$filaReparacion['Nombre_Servicio'].'</div>';
+                                        $contadorCaracteres = strlen($filaReparacion['Detalle_Descripcion']);
+                                        if($contadorCaracteres>120){
+                                            $cadenaResumen = substr($filaReparacion['Detalle_Descripcion'],0,120)." ...";
+                                            echo '<div id="modificarDescripcion">
+                                                    <div class="descripcion-servicio">'.$cadenaResumen.'</div>
+                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                </div>';
+                                        }else{
+                                            echo '<div class="descripcion-servicio">'.$filaReparacion['Detalle_Descripcion'].'</div>';      
+                                        }
+                                        if($filaReparacion['Moneda'] == "$"){
+                                            echo '<div class="precio font-s-24 my-1">'.$filaReparacion['Moneda']." ".$filaReparacion['Precio'].'</div>';
+                                        }else{
+                                            echo '<div class="precio font-s-24 my-1">'.$filaReparacion['Precio']." ".$filaReparacion['Moneda'].'</div>';
+                                        }
+                                            echo '<div class="font-s-14 mb-1">Publicado el '.$filaReparacion['Fecha_Publicacion'].'</div>
+                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '</div>';
+                                    
+                                }//Fin Reparaciones
+                            }else{
+                                echo '<div align="center" class="pb-5 color-black"><h5>No tiene servicios publicados</h5></div>';
+                            }
+
+                        }else{
+                            echo '<div align="center" class="pb-5"><h4>No se pudo conectar a la BD</h4></div>';
+                        }
+                    ?>
+                <!--<div id="div-link-Cursos" class="mb-4 ml-5" align="left"><a class="anchor-custom font-s-24" onclick="mostrarCategoria('Cursos');" ><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Cursos</b></a></div>
+                    <div id="div-Cursos" class="row misServicios mx-auto" style="display:none;">
                         <div class="col-xl-6 col-sm-12 mb-5">
-                            <!--<div class="encabezado-imagen" style="background-image: url(../images/cursoPrueba.png);"></div>-->
                             <div><img src="../images/cursoPrueba.png" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">Disponible</span></div>
                             <div class="contenido-informacion px-3 py-2">
                                 <div class="titulo-servicio my-1">Nombre de Servicio 1</div>
-                                <div class="resumen-servicio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia eius sed placeat quia iste vero doloribus delectus...</div>
-                                <div class="detalle-servicio"></div>
-                                <div class="likes-comentarios"></div>
-                                <div class="ver-mas"><a>Ver más</a> | <a>Eliminar</a></div>
+                                <div class="descripcion-servicio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia eius sed placeat quia iste vero doloribus delectus...</div>
+                                <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                <div class="precio font-s-24 my-1">120.99 Lps.</div>
+                                <div class="font-s-14 mb-1">Publicado el 20-03-2020</div>
+                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-sm-12 mb-5">
-                            <!--<div class="encabezado-imagen" style="background-image: url(../images/cursoPrueba.png);"></div>-->
-                            <div><img src="../images/cursoPrueba.png" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">Disponible</span></div>
-                            <div class="contenido-informacion px-3 py-2">
-                                <div class="titulo-servicio my-1">Nombre de Servicio 2</div>
-                                <div class="resumen-servicio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia eius sed placeat quia iste vero doloribus delectus...</div>
-                                <div class="detalle-servicio"></div>
-                                <div class="likes-comentarios"></div>
-                                <div class="ver-mas"><a>Ver más</a> | <a>Eliminar</a></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-sm-12 mb-5">
-                            <!--<div class="encabezado-imagen" style="background-image: url(../images/cursoPrueba.png);"></div>-->
-                            <div><img src="../images/cursoPrueba.png" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">Disponible</span></div>
-                            <div class="contenido-informacion px-3 py-2">
-                                <div class="titulo-servicio my-1">Nombre de Servicio 3</div>
-                                <div class="resumen-servicio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia eius sed placeat quia iste vero doloribus delectus...</div>
-                                <div class="detalle-servicio"></div>
-                                <div class="likes-comentarios"></div>
-                                <div class="ver-mas"><a>Ver más</a> | <a>Eliminar</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>-->
                     
                 </div>
             </div>
-             
         </div>
         <div class="footer py-5 border-top text-center">
             <div class="container">
