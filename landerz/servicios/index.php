@@ -290,9 +290,9 @@
                                         $contadorCaracteres = strlen($filaCurso['Detalle_Descripcion']);
                                         if($contadorCaracteres>120){
                                             $cadenaResumen = substr($filaCurso['Detalle_Descripcion'],0,120)." ...";
-                                            echo '<div id="modificarDescripcion">
+                                            echo '<div id="desc'.$filaCurso['ID_Servicio'].'">
                                                     <div class="descripcion-servicio">'.$cadenaResumen.'</div>
-                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                    <div class="ver-mas"><a onclick="verMas('.$filaCurso['ID_Servicio'].');">Ver más</a></div>
                                                 </div>';
                                         }else{
                                             echo '<div class="descripcion-servicio">'.$filaCurso['Detalle_Descripcion'].'</div>';      
@@ -303,7 +303,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaCurso['Precio']." ".$filaCurso['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaCurso['Fecha_Publicacion'].'</div>
-                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                         </div>';
                                     }
@@ -328,9 +328,9 @@
                                         $contadorCaracteres = strlen($filaTutoria['Detalle_Descripcion']);
                                         if($contadorCaracteres>120){
                                             $cadenaResumen = substr($filaTutoria['Detalle_Descripcion'],0,120)." ...";
-                                            echo '<div id="modificarDescripcion">
+                                            echo '<div id="desc'.$filaTutoria['ID_Servicio'].'">
                                                     <div class="descripcion-servicio">'.$cadenaResumen.'</div>
-                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                    <div class="ver-mas"><a onclick="verMas('.$filaTutoria['ID_Servicio'].');">Ver más</a></div>
                                                 </div>';
                                         }else{
                                             echo '<div class="descripcion-servicio">'.$filaTutoria['Detalle_Descripcion'].'</div>';      
@@ -341,7 +341,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaTutoria['Precio']." ".$filaTutoria['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaTutoria['Fecha_Publicacion'].'</div>
-                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                         </div>';
                                     }
@@ -367,9 +367,9 @@
                                         $contadorCaracteres = strlen($filaArticulo['Detalle_Descripcion']);
                                         if($contadorCaracteres>120){
                                             $cadenaResumen = substr($filaArticulo['Detalle_Descripcion'],0,120)." ...";
-                                            echo '<div id="modificarDescripcion">
+                                            echo '<div id="desc'.$filaArticulo['ID_Servicio'].'">
                                                     <div class="descripcion-servicio">'.$cadenaResumen.'</div>
-                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                    <div class="ver-mas"><a onclick="verMas('.$filaArticulo['ID_Servicio'].');">Ver más</a></div>
                                                 </div>';
                                         }else{
                                             echo '<div class="descripcion-servicio">'.$filaArticulo['Detalle_Descripcion'].'</div>';      
@@ -380,7 +380,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaArticulo['Precio']." ".$filaArticulo['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaArticulo['Fecha_Publicacion'].'</div>
-                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                         </div>';
                                     }
@@ -406,9 +406,9 @@
                                         $contadorCaracteres = strlen($filaEvento['Detalle_Descripcion']);
                                         if($contadorCaracteres>120){
                                             $cadenaResumen = substr($filaEvento['Detalle_Descripcion'],0,120)." ...";
-                                            echo '<div id="modificarDescripcion">
+                                            echo '<div id="desc'.$filaEvento['ID_Servicio'].'">
                                                     <div class="descripcion-servicio">'.$cadenaResumen.'</div>
-                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                    <div class="ver-mas"><a onclick="verMas('.$filaEvento['ID_Servicio'].');">Ver más</a></div>
                                                 </div>';
                                         }else{
                                             echo '<div class="descripcion-servicio">'.$filaEvento['Detalle_Descripcion'].'</div>';      
@@ -419,7 +419,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaEvento['Precio']." ".$filaEvento['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaEvento['Fecha_Publicacion'].'</div>
-                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                         </div>';
                                     }
@@ -427,14 +427,14 @@
                                     
                                 }// Fin Eventos
                                 //Reparaciones
-                                $pdo = getPDO();
-                                $cantidadReparaciones = $pdo->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
+                                //$pdo = getPDO();
+                                $cantidadReparaciones = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
                                 WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadReparaciones['Cantidad']>0){
                                     echo '<div id="div-link-reparaciones" class="mb-4 ml-5" align="left"><a onclick="mostrarReparaciones();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Reparaciones</b></a></div>
                                         <div id="div-reparaciones" class="row misServicios mx-auto" style="display:none;">
                                         ';
-                                    $listReparaciones = $pdo->query("SELECT * FROM Servicios_Publicados 
+                                    $listReparaciones = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario 
                                     ORDER BY Fecha_Publicacion,Hora_Publicacion");
                                     while($filaReparacion=$listReparaciones->fetch(PDO::FETCH_ASSOC)){
@@ -446,9 +446,9 @@
                                         $contadorCaracteres = strlen($filaReparacion['Detalle_Descripcion']);
                                         if($contadorCaracteres>120){
                                             $cadenaResumen = substr($filaReparacion['Detalle_Descripcion'],0,120)." ...";
-                                            echo '<div id="modificarDescripcion">
+                                            echo '<div id="desc'.$filaReparacion['ID_Servicio'].'">
                                                     <div class="descripcion-servicio">'.$cadenaResumen.'</div>
-                                                    <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
+                                                    <div class="ver-mas"><a onclick="verMas('.$filaReparacion['ID_Servicio'].');">Ver más</a></div>
                                                 </div>';
                                         }else{
                                             echo '<div class="descripcion-servicio">'.$filaReparacion['Detalle_Descripcion'].'</div>';      
@@ -459,7 +459,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaReparacion['Precio']." ".$filaReparacion['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaReparacion['Fecha_Publicacion'].'</div>
-                                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                         </div>';
                                     }

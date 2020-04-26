@@ -96,3 +96,57 @@ function ocultarReparaciones(){
     `);
     $("#div-reparaciones").hide(500);
 }
+//Funcion para ver mas detalle de la descripcion
+function verMas(IdServicio){
+    var parametros = "";
+    parametros="nIdServicio="+IdServicio+"&nEstado="+"verMas";
+    //Peticion AJAX
+    $.ajax({
+        url:"../ajax/descripcionServicio.php",
+        method:"POST",
+        data:parametros,
+        dataType:"html",
+        success:function(respuesta){
+            //console.log(respuesta);
+            //alert(respuesta);
+            $("#desc"+IdServicio).empty();
+            $("#desc"+IdServicio).append(`
+                <div class="descripcion-servicio">`+respuesta+`</div>
+                <div class="ver-mas"><a onclick="verMenos('`+IdServicio+`');">Ver menos</a></div>
+            `);
+        },
+        error:function(error){
+            //console.log(error);
+            alert(error);
+        } 
+    })
+}
+//Funcion para ver menos detalle de la descripcion
+function verMenos(IdServicio){
+    var parametros = "";
+    parametros="nIdServicio="+IdServicio+"&nEstado="+"verMenos";
+    //Peticion AJAX
+    $.ajax({
+        url:"../ajax/descripcionServicio.php",
+        method:"POST",
+        data:parametros,
+        dataType:"html",
+        success:function(respuesta){
+            //console.log(respuesta);
+            //alert(respuesta);
+            $("#desc"+IdServicio).empty();
+            $("#desc"+IdServicio).append(`
+                <div class="descripcion-servicio">`+respuesta+`</div>
+                <div class="ver-mas"><a onclick="verMas('`+IdServicio+`');">Ver más</a></div>
+            `);
+        },
+        error:function(error){
+            //console.log(error);
+            alert(error);
+        } 
+    })
+}
+//No disponible
+function unavailable(){
+    alert("No implementado aún");
+}
