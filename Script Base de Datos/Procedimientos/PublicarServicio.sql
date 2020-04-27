@@ -34,6 +34,7 @@ SP: BEGIN
 	AND Detalle_Descripcion = pcDescripcion;
 	
 	IF vnConteoTemp > 0 THEN
+		SET pnCodigoMensaje = 2;
 		SET pcMensaje = "Ya ha publicado este servicio";
 		LEAVE SP;
 	END IF;

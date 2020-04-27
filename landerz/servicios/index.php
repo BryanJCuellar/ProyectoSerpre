@@ -69,7 +69,7 @@
                     $insertarServicio->closeCursor(); //permite limpiar y ejecutar la segunda query
                     $salidaSP = '';
                     $salidaSP = $conexion->query("SELECT @codigoMensaje AS pnCodigoMensaje,@mensaje AS pcMensaje")->fetch(PDO::FETCH_ASSOC);
-                    if($salidaSP['pnCodigoMensaje']==0){
+                    if($salidaSP['pnCodigoMensaje']==0 || $salidaSP['pnCodigoMensaje']==2){
                         echo '<script language="javascript">alert("'.$salidaSP['pcMensaje'].'")</script>';
                     }else{
                         echo '<script language="javascript">alert("Ocurrio un error: "'.$salidaSP['pcMensaje'].'")</script>';
