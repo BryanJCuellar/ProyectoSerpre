@@ -20,8 +20,7 @@ CREATE TABLE `id12846177_serprehn`.`Usuarios_Registrados` (
   `Email` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `Foto_Perfil` LONGBLOB NULL,
-  CONSTRAINT `PK_Usuarios_Registrados` PRIMARY KEY (`ID_Usuario`),
-  CONSTRAINT `CHK_GENERO` CHECK(`Genero` IN('M','F','N/A'))
+  CONSTRAINT `PK_Usuarios_Registrados` PRIMARY KEY (`ID_Usuario`)
  )
 
 -- -----------------------------------------------------
