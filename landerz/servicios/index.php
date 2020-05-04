@@ -144,7 +144,7 @@
 
     <link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet" href="../css/estilos.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -531,6 +531,6 @@
     <script src="../js/jquery.sticky.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
-    <script src="js/controladorServicio.js?v=<?php echo time(); ?>"></script>
+    <script src="js/controladorServicio.js"></script>
 </body>
 </html>
