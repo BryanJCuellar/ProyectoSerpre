@@ -26,9 +26,9 @@
 
     <link rel="stylesheet" href="css/aos.css">
 
-    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/estilos.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -42,7 +42,7 @@
         </div>
         <div class="site-mobile-menu-body">
             <ul>
-                <li style="list-style:none !important;"><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                <li style="list-style:none !important;"><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
             </ul>
         </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="col-12 col-md-12 main-menu">
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu mr-auto d-none d-lg-block">
-                            <li><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                            <li><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -142,7 +142,7 @@
     <script src="js/jquery.sticky.js"></script>
     <script src="js/main.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="js/controladorLogin.js?v=<?php echo time(); ?>"></script>
+    <script src="js/controladorLogin.js"></script>
 
 </body>
 </html>

@@ -24,9 +24,9 @@
 
     <link rel="stylesheet" href="css/aos.css">
 
-    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/estilos.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -61,7 +61,7 @@
                 <div class="row align-items-center">
                 
                 <div class="col-6 col-md-6 col-xl-2  d-block d-lg-none">
-                    <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
+                    <h1 class="mb-0 site-logo"><a href="../" class="text-black h2 mb-0">SerPre HN<span class="text-primary">.</span> </a></h1>
                 </div>
 
                 <div class="col-12 col-md-12 main-menu">
@@ -69,7 +69,7 @@
 
                     <ul class="site-menu main-menu mr-auto d-none d-lg-block">
                         <li><a href="login.php#inicio-sesion" class="font-16-weight nav-link enlace-cursor-color">[Iniciar Sesión]</a></li>
-                        <li><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                        <li><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                     </ul>
                     </nav>
                 </div>

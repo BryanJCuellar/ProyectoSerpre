@@ -45,8 +45,8 @@
         <div class="site-mobile-menu-body">
             <ul>
                 <li style="list-style:none !important;"><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mi Perfil]</a></li>
-                <li style="list-style:none !important;"><a href="servicios/" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
-                <li style="list-style:none !important;"><a href="index.php" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                <li style="list-style:none !important;"><a href="servicios/index.php" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
+                <li style="list-style:none !important;"><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                 <li style="list-style:none !important;"><a href="sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
             </ul>
         </div>
@@ -76,8 +76,8 @@
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu mr-auto d-none d-lg-block">
                             <li><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mi Perfil]</a></li>
-                            <li><a href="servicios/" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
-                            <li><a href="../landerz/" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
+                            <li><a href="servicios/index.php" class="font-16-weight nav-link enlace-cursor-color">[Mis Servicios]</a></li>
+                            <li><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
                             <li><a href="sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
                         </ul>
                     </nav>
