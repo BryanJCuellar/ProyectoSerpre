@@ -531,6 +531,6 @@
     <script src="../js/jquery.sticky.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
-    <script src="js/controladorServicio.js"></script>
+    <script src="../js/controladorServicio.js"></script>
 </body>
 </html>
