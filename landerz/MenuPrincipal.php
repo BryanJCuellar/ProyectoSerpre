@@ -31,6 +31,15 @@
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="css/estilos.css?v=<?php echo time(); ?>">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163223137-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-163223137-1');
+    </script>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
