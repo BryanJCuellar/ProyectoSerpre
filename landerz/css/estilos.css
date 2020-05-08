@@ -318,3 +318,13 @@
         padding: 3rem 1rem !important;
     }
 }
+.card:hover{
+    transform: translateX(-15px);
+    
+    box-shadow: 0 12px 16px rgba(0, 0, 0,0.2);
+}
+.card img{
+    width: 288px;
+    height: 200px;
+
+}

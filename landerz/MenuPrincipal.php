@@ -52,7 +52,7 @@
         </div>
         </div>
     
-        <div class="container d-none d-lg-block">
+        <div class="container-fluid d-none d-lg-block">
         <div class="row">
             <div class="col-12 text-center mb-4 mt-5">
                 <h1 class="mb-0 site-logo"><a href="../landerz/" class="text-black h2 mb-0">
@@ -97,22 +97,180 @@
                 ?>
                 <!--<div class="color-w font-s-20 my-5" align="right">-->
                     <!--<a id="publicarServicio" class="btn btn-info mr-2 mb-2" href = "#">Publica tu Servicio</a>-->
-                <!--</div>-->
+                
                 <form class="color-w font-s-20 my-5 mr-3" align="right" action="" method ="">
                         <input type="text" name="nombre" placeholder="Buscar" class="search"><span><a href="#" class="color-w enlace-cursor-color ml-2"><i class="fas fa-search"></i></a></span>
                 </form>
                 <div align="center"><h2 class="color-w">SERVICIOS: CATEGORIAS</h2></div>
                 <hr class="background-color-w"><br><br><br>
-                <h4 class="color-w">Cursos</h4>
+                
+                <!--TARJETAS DE INICIO-->
+                <h4 class="color-w"> <a href="" style="color:white">Cursos</a> </h4> 
+                <div class="row">
+                    <!--TARJETAS A AGREGAR DESDE LA BASE DE DATOS-->
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/cursoPrueba1.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Curso Python</h5>
+                                <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/cursoGuitarra.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Curso Guitarra</h5>
+                                <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/cursoPrueba1.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Curso Python</h5>
+                                    <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+               
+                
                 <hr class="background-color-w"><br><br>
-                <div></div>
-                <h4 class="color-w">Tutorias</h4>
+                <h4 class="color-w"><a href="" style="color:white">Articulos de segunda mano</a></h4>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/telefono.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Venta celular</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/telefono.jpg" class="card-img-top" alt="...">  
+                            <div class="card-body">
+                                <h5 class="card-title">Venta celular</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/telefono.jpg" class="card-img-top" alt="...">  
+                            <div class="card-body">
+                                <h5 class="card-title">Venta celular</h5>
+                                    <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <hr class="background-color-w"><br><br>
-                <h4 class="color-w">Articulos de segunda mano</h4>
+                <h4 class="color-w"><a href="" style="color:white">Eventos</a></h4>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/evento1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Evento de bodas</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"> 
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/evento1.jpg" class="card-img-top" alt="...">   
+                            <div class="card-body">
+                                <h5 class="card-title">Evento de bodas</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/evento1.jpg" class="card-img-top" alt="...">   
+                            <div class="card-body">
+                                <h5 class="card-title">Evento de bodas</h5>
+                                    <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <hr class="background-color-w"><br><br>
-                <h4 class="color-w">Eventos</h4>
+                <h4 class="color-w"><a href="" style="color:white">Reparaciones</a></h4>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/reparar.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Repracion de celulares</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/reparar.jpg" class="card-img-top" alt="...">   
+                            <div class="card-body">
+                                <h5 class="card-title">Repracion de celulares</h5>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/reparar.jpg" class="card-img-top" alt="...">  
+                            <div class="card-body">
+                                <h5 class="card-title">Repracion de celulares</h5>
+                                    <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr class="background-color-w"><br><br>
-                <h4 class="color-w">Reparaciones</h4>
+                <h4 class="color-w"><a href="" style="color:white">Suscribirme</a></h4>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/matematicas.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Tutorias</h5>
+                                <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/matematicas.jpg" class="card-img-top" alt="...">   
+                            <div class="card-body">
+                                <h5 class="card-title">Tutorias</h5>
+                                <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card text-center border-0" style="width: 18rem;">
+                            <img src="images/matematicas.jpg" class="card-img-top" alt="...">  
+                            <div class="card-body">
+                                <h5 class="card-title">Tutorias</h5>
+                                    <a href="#" class="btn btn-primary">Suscribirme</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <hr class="background-color-w"><br><br>
 
 
