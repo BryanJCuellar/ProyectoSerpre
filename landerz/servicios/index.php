@@ -161,7 +161,7 @@
                 <li style="list-style:none !important;"><a href="#" class="font-16-weight nav-link enlace-cursor-color">[Mi Perfil]</a></li>
                 <li style="list-style:none !important;"><a href="../MenuPrincipal.php" class="font-16-weight nav-link enlace-cursor-color">[Menú Principal]</a></li>
                 <li style="list-style:none !important;"><a href="../" class="font-16-weight nav-link enlace-cursor-color">[Página Principal]</a></li>
-                <li style="list-style:none !important;"><a href="sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
+                <li style="list-style:none !important;"><a href="../sesion/salir.php" class="font-16-weight nav-link enlace-cursor-color">[Cerrar Sesión]</a></li>
             </ul>
         </div>
         </div>
@@ -276,7 +276,7 @@
                                 WHERE ID_Categoria_Servicio = 1 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadCursos['Cantidad']>0){
                                     echo '<div id="div-link-cursos" class="mb-4 ml-5" align="left"><a onclick="mostrarCursos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Cursos</b></a></div>
-                                        <div id="div-cursos" class="row misServicios mx-auto" style="display:none;">
+                                        <div id="div-cursos" class="row mx-auto" style="display:none;">
                                         ';
                                     $listCursos = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 1 AND ID_Usuario_Publicador = $idUsuario
@@ -284,6 +284,7 @@
                                     while($filaCurso=$listCursos->fetch(PDO::FETCH_ASSOC)){
                                         echo '
                                         <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div class="tarjeta mx-auto">
                                             <div><img src="data:image/png;base64, '.base64_encode($filaCurso['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaCurso['Disponibilidad'].'</span></div>
                                             <div class="contenido-informacion px-3 py-2">
                                                 <div class="titulo-servicio my-1">'.$filaCurso['Nombre_Servicio'].'</div>';
@@ -305,6 +306,7 @@
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaCurso['Fecha_Publicacion'].'</div>
                                                 <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
+                                            </div>
                                         </div>';
                                     }
                                     echo '</div>';
@@ -314,7 +316,7 @@
                                 WHERE ID_Categoria_Servicio = 2 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadTutorias['Cantidad']>0){
                                     echo '<div id="div-link-tutorias" class="mb-4 ml-5" align="left"><a onclick="mostrarTutorias();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Tutorias</b></a></div>
-                                        <div id="div-tutorias" class="row misServicios mx-auto" style="display:none;">
+                                        <div id="div-tutorias" class="row mx-auto" style="display:none;">
                                         ';
                                     $listTutorias = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 2 AND ID_Usuario_Publicador = $idUsuario 
@@ -322,6 +324,7 @@
                                     while($filaTutoria=$listTutorias->fetch(PDO::FETCH_ASSOC)){
                                         echo '
                                         <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div class="tarjeta mx-auto">
                                             <div><img src="data:image/png;base64, '.base64_encode($filaTutoria['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaTutoria['Disponibilidad'].'</span></div>
                                             <div class="contenido-informacion px-3 py-2">
                                                 <div class="titulo-servicio my-1">'.$filaTutoria['Nombre_Servicio'].'</div>';
@@ -343,6 +346,7 @@
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaTutoria['Fecha_Publicacion'].'</div>
                                                 <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
+                                            </div>
                                         </div>';
                                     }
                                     echo '</div>';
@@ -353,7 +357,7 @@
                                 WHERE ID_Categoria_Servicio = 3 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadArticulos['Cantidad']>0){
                                     echo '<div id="div-link-articulos" class="mb-4 ml-5" align="left"><a onclick="mostrarArticulos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Articulos de segunda mano</b></a></div>
-                                        <div id="div-articulos" class="row misServicios mx-auto" style="display:none;">
+                                        <div id="div-articulos" class="row mx-auto" style="display:none;">
                                         ';
                                     $listArticulos = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 3 AND ID_Usuario_Publicador = $idUsuario 
@@ -361,6 +365,7 @@
                                     while($filaArticulo=$listArticulos->fetch(PDO::FETCH_ASSOC)){
                                         echo '
                                         <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div class="tarjeta mx-auto">
                                             <div><img src="data:image/png;base64, '.base64_encode($filaArticulo['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaArticulo['Disponibilidad'].'</span></div>
                                             <div class="contenido-informacion px-3 py-2">
                                                 <div class="titulo-servicio my-1">'.$filaArticulo['Nombre_Servicio'].'</div>';
@@ -382,6 +387,7 @@
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaArticulo['Fecha_Publicacion'].'</div>
                                                 <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
+                                            </div>
                                         </div>';
                                     }
                                     echo '</div>';
@@ -392,7 +398,7 @@
                                 WHERE ID_Categoria_Servicio = 4 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadEventos['Cantidad']>0){
                                     echo '<div id="div-link-eventos" class="mb-4 ml-5" align="left"><a onclick="mostrarEventos();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Eventos</b></a></div>
-                                        <div id="div-eventos" class="row misServicios mx-auto" style="display:none;">
+                                        <div id="div-eventos" class="row mx-auto" style="display:none;">
                                         ';
                                     $listEventos = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 4 AND ID_Usuario_Publicador = $idUsuario 
@@ -400,6 +406,7 @@
                                     while($filaEvento=$listEventos->fetch(PDO::FETCH_ASSOC)){
                                         echo '
                                         <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div class="tarjeta mx-auto">
                                             <div><img src="data:image/png;base64, '.base64_encode($filaEvento['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaEvento['Disponibilidad'].'</span></div>
                                             <div class="contenido-informacion px-3 py-2">
                                                 <div class="titulo-servicio my-1">'.$filaEvento['Nombre_Servicio'].'</div>';
@@ -421,6 +428,7 @@
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaEvento['Fecha_Publicacion'].'</div>
                                                 <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
                                             </div>
+                                            </div>
                                         </div>';
                                     }
                                     echo '</div>';
@@ -432,7 +440,7 @@
                                 WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
                                 if($cantidadReparaciones['Cantidad']>0){
                                     echo '<div id="div-link-reparaciones" class="mb-4 ml-5" align="left"><a onclick="mostrarReparaciones();" class="anchor-custom font-s-24"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Reparaciones</b></a></div>
-                                        <div id="div-reparaciones" class="row misServicios mx-auto" style="display:none;">
+                                        <div id="div-reparaciones" class="row mx-auto" style="display:none;">
                                         ';
                                     $listReparaciones = $conexion->query("SELECT * FROM Servicios_Publicados 
                                     WHERE ID_Categoria_Servicio = 5 AND ID_Usuario_Publicador = $idUsuario 
@@ -440,6 +448,7 @@
                                     while($filaReparacion=$listReparaciones->fetch(PDO::FETCH_ASSOC)){
                                         echo '
                                         <div class="col-xl-6 col-sm-12 mb-5">
+                                            <div class="tarjeta mx-auto">
                                             <div><img src="data:image/png;base64, '.base64_encode($filaReparacion['Imagen']).'" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">'.$filaReparacion['Disponibilidad'].'</span></div>
                                             <div class="contenido-informacion px-3 py-2">
                                                 <div class="titulo-servicio my-1">'.$filaReparacion['Nombre_Servicio'].'</div>';
@@ -460,6 +469,7 @@
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaReparacion['Fecha_Publicacion'].'</div>
                                                 <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                            </div>
                                             </div>
                                         </div>';
                                     }
