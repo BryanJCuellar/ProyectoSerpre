@@ -50,7 +50,7 @@
 
 /*Class de los botones login signup publicar*/
 .boton-login{
-    width:60%;
+    width:65%;
     margin-left:auto !important;
     margin-right:auto !important;
     font-size: 18px;
@@ -120,12 +120,13 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
-.misServicios{
+/*.misServicios{
     width:95%;
-}
+}*/
 .span-disponibilidad{
     background-color: #302b2b80;
-    width:40%;
+    width:20%;
+    min-width: 12rem;
     color:#ffffff;
     font-size:16px;
     border-radius: 3px;
@@ -136,12 +137,17 @@
     text-align:center;
     /*margin:5px 0px 0px 5px;*/
     top:0;
-    display: block;/*importante si primero va la img luego el span*/
+    display: block;
 
 }
+.tarjeta{
+    width: 21rem;
+    min-width:17rem;
+}
+
 .encabezado-imagen{
     width: 100%;
-    height:280px;
+    height:220px;
 }
 .contenido-informacion{
     background-color:#272525;
@@ -241,18 +247,18 @@
 /**/
 @media (max-width: 1199px) {
     /**/
-    .misServicios{
-        width:75%;
-    }
-    .encabezado-imagen{
-        height:300px;
+    /*.misServicios{
+        width:80%;
+    }*/
+    .tarjeta{
+        width:23rem;
     }
 }
 
 @media (max-width: 991px) {
-    .login-registro {
+    /*.login-registro {
         width: 70%; 
-    }
+    }*/
     /**/
     .box-left{
         margin-left: auto;
@@ -268,32 +274,25 @@
         width:100%;
         min-width: 0;
     }
-    .misServicios{
-        width:65%;
-    }
-    .encabezado-imagen{
-        height:320px;
-    }
     .form-publish{
         width: 60%;
         padding: 3rem 3rem !important;
     }
+    .encabezado-imagen{
+        height:220px;
+    }
+
 }
 
 @media (max-width: 767px) {
     .login-registro{
         width: 95%;
+        min-width: 16rem;
     }
     .div-form-login-registro{
         width:85%;
     }
     /**/
-    .misServicios{
-        width:80%;
-    }
-    .encabezado-imagen{
-        height:310px;
-    }
     .form-publish{
         width: 80%;
         padding: 3rem 2rem !important;
@@ -302,22 +301,17 @@
 
 @media (max-width: 575px) {
     .boton-login{
-        width:90% !important;
+        width:100% !important;
     }
     .div-form-login-registro{
-        width:90%;
-    }
-    /**/
-    .misServicios{
         width:100%;
     }
-    .encabezado-imagen{
-        height:260px;
-    }
-    .form-publish{
-        padding: 3rem 1rem !important;
+    /**/
+    .tarjeta{
+        width:17rem;
     }
 }
+
 .card:hover{
     transform: translateX(-15px);
     
@@ -326,5 +320,4 @@
 .card img{
     width: 288px;
     height: 200px;
-
 }
