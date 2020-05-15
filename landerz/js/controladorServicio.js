@@ -1,7 +1,3 @@
-/*$(document).ready(function(){
-    linkCategoria();
-});*/
-
 // Funcion para mostrar el formulario de publicar servicio
 function mostrarFormularioPublicarServicio(){
     $("#div-link-publish").empty();
@@ -116,8 +112,8 @@ function verMas(IdServicio){
             `);
         },
         error:function(error){
-            //console.log(error);
-            alert(error);
+            console.log(error);
+            //alert(error);
         } 
     })
 }
@@ -141,12 +137,133 @@ function verMenos(IdServicio){
             `);
         },
         error:function(error){
-            //console.log(error);
-            alert(error);
+            console.log(error);
+            //alert(error);
         } 
     })
 }
+
+//Funcion para abrir el modal de editar servicios
+function abrirModalEditar(IdServicio){
+    var parametros = "";
+    parametros="idServicio="+IdServicio;
+    /*console.log(parametros)*/
+    //Peticion AJAX para obtener datos de servicio
+    $.ajax({
+        url:"../ajax/modificarServicio.php?accion=listar",
+        method:"POST",
+        data:parametros,
+        dataType:"json",
+        success:function(data){
+            //console.log("datos: "+data);
+            //alert(data);
+            //ID_Servicio
+            $("input[name='IDservicio']").val(data.result.ID_Servicio);
+            //Categoria
+            $("select[name='modal-categoria'] option").each(function(){
+                if($(this).val() != data.result.ID_Categoria_Servicio){
+                    $(this).attr("selected",false);;
+                }
+            });
+            $("select[name='modal-categoria'] option[value="+data.result.ID_Categoria_Servicio+"]").attr("selected",true);
+            //Nombre Servicio
+            $("input[name='modal-servicio']").val(data.result.Nombre_Servicio);
+            //Descripcion
+            $("textarea[name='modal-descripcion']").val(data.result.Detalle_Descripcion);
+            //Precio
+            $("input[name='modal-precio']").val(data.result.Precio);
+            //Moneda
+            $("select[name='modal-moneda'] option").each(function(){
+                if($(this).val() != data.result.Moneda){
+                    $(this).attr("selected",false);
+                }
+            });
+            $("select[name='modal-moneda'] option[value='"+data.result.Moneda+"']").attr("selected",true);
+            //Disponibilidad
+            if(data.result.Disponibilidad == "Disponible"){
+                $("input[name='chk-disponible']").prop('checked',true);
+
+            }else{
+                $("input[name='chk-disponible']").prop('checked',false);
+            }
+        },
+        error:function(error){
+            console.log(error);
+            //alert(error);
+        } 
+    })
+    $("#editarServicio").modal("show");
+}
+
+//Funcion para eliminar servicios
+function eliminarServicio(IdServicio){
+    var parametros = "";
+    //Confirm Box
+    if(confirm("Seguro que desea eliminar el servicio?\nAviso: Esta acción es irreversible")){
+        parametros="idServicio="+IdServicio;
+        //Peticion AJAX para obtener datos de servicio
+        $.ajax({
+            url:"../ajax/modificarServicio.php?accion=eliminar",
+            method:"POST",
+            data:parametros,
+            dataType:"html",
+            success:function(respuesta){
+                if(respuesta == "Servicio Eliminado con Exito"){
+                    alert(respuesta);
+                    window.location.href="../servicios/index.php";
+                }
+            },
+            error:function(error){
+                console.log(error);
+                //alert(error);
+            } 
+        })
+    }else{
+        return;
+    }
+}
+
 //No disponible
 function unavailable(){
     alert("No implementado aún");
 }
+
+$(document).ready(function(){
+    /*var form = $("#id-form-edit");
+    form.submit(function(e){
+        // prevent form submission
+        e.preventDefault();
+        // submit the form via Ajax
+        var fd = new FormData();
+        fd.append('file',)
+        var parametro = "";
+        parametro = "&id_Servicio="+ID_Servicio;
+        $.ajax({
+            url:form.attr('action'),
+            method:form.attr('method'),
+            contentType: 'multipart/form-data',
+            processData:false,
+            //dataType:"html",
+            data:new FormData(this)+parametro,
+            success:function(respuesta){
+                //console.log(respuesta);
+                alert(respuesta);
+                
+            },
+            error:function(error){
+                console.log(error);
+                //alert(error);
+            } 
+        })
+
+    });*/
+    $("input[name='chk-modal']").click(function(){
+        for(var i=0;i<=6;i++){
+            if($("#chk-modal-"+i).is(':checked')){
+                $("#fila-modal-"+i).show(500);
+            }else{
+                $("#fila-modal-"+i).hide(500);
+            }
+        }
+    });
+});

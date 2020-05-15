@@ -304,13 +304,13 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaCurso['Precio']." ".$filaCurso['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaCurso['Fecha_Publicacion'].'</div>
-                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="abrirModalEditar('.$filaCurso['ID_Servicio'].');" class="editar-eliminar">Editar</a> | <a onclick="eliminarServicio('.$filaCurso['ID_Servicio'].');" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                             </div>
                                         </div>';
                                     }
                                     echo '</div>';
-                                }//Fin Cursos
+                                }//Fin Cursos data-toggle="modal" data-target="#editarServicio"
                                 //Tutorias
                                 $cantidadTutorias = $conexion->query("SELECT COUNT(*) AS Cantidad FROM Servicios_Publicados 
                                 WHERE ID_Categoria_Servicio = 2 AND ID_Usuario_Publicador = $idUsuario")->fetch(PDO::FETCH_ASSOC);
@@ -344,7 +344,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaTutoria['Precio']." ".$filaTutoria['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaTutoria['Fecha_Publicacion'].'</div>
-                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="abrirModalEditar('.$filaTutoria['ID_Servicio'].');" class="editar-eliminar">Editar</a> | <a onclick="eliminarServicio('.$filaTutoria['ID_Servicio'].');" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                             </div>
                                         </div>';
@@ -385,7 +385,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaArticulo['Precio']." ".$filaArticulo['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaArticulo['Fecha_Publicacion'].'</div>
-                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="abrirModalEditar('.$filaArticulo['ID_Servicio'].');" class="editar-eliminar">Editar</a> | <a onclick="eliminarServicio('.$filaArticulo['ID_Servicio'].');" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                             </div>
                                         </div>';
@@ -426,7 +426,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaEvento['Precio']." ".$filaEvento['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaEvento['Fecha_Publicacion'].'</div>
-                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="abrirModalEditar('.$filaEvento['ID_Servicio'].');" class="editar-eliminar">Editar</a> | <a onclick="eliminarServicio('.$filaEvento['ID_Servicio'].');" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                             </div>
                                         </div>';
@@ -468,7 +468,7 @@
                                             echo '<div class="precio font-s-24 my-1">'.$filaReparacion['Precio']." ".$filaReparacion['Moneda'].'</div>';
                                         }
                                             echo '<div class="font-s-14 mb-1">Publicado el '.$filaReparacion['Fecha_Publicacion'].'</div>
-                                                <div><a onclick="unavailable();" class="editar-eliminar">Editar</a> | <a onclick="unavailable();" class="editar-eliminar">Eliminar</a></div>
+                                                <div><a onclick="abrirModalEditar('.$filaReparacion['ID_Servicio'].');" class="editar-eliminar">Editar</a> | <a onclick="eliminarServicio('.$filaReparacion['ID_Servicio'].');" class="editar-eliminar">Eliminar</a></div>
                                             </div>
                                             </div>
                                         </div>';
@@ -483,24 +483,104 @@
                         }else{
                             echo '<div align="center" class="pb-5"><h4>No se pudo conectar a la BD</h4></div>';
                         }
-                    ?>
-                <!--<div id="div-link-Cursos" class="mb-4 ml-5" align="left"><a class="anchor-custom font-s-24" onclick="mostrarCategoria('Cursos');" ><i class="fas fa-caret-right"></i>&nbsp;&nbsp;<b>Cursos</b></a></div>
-                    <div id="div-Cursos" class="row misServicios mx-auto" style="display:none;">
-                        <div class="col-xl-6 col-sm-12 mb-5">
-                            <div><img src="../images/cursoPrueba.png" class="encabezado-imagen img-fluid" alt="Imagen-servicio"><span class="span-disponibilidad">Disponible</span></div>
-                            <div class="contenido-informacion px-3 py-2">
-                                <div class="titulo-servicio my-1">Nombre de Servicio 1</div>
-                                <div class="descripcion-servicio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia eius sed placeat quia iste vero doloribus delectus...</div>
-                                <div class="ver-mas"><a onclick="verMas();">Ver más</a></div>
-                                <div class="precio font-s-24 my-1">120.99 Lps.</div>
-                                <div class="font-s-14 mb-1">Publicado el 20-03-2020</div>
-                                <div><a class="editar-eliminar">Editar</a> | <a class="editar-eliminar">Eliminar</a></div>
-                            </div>
-                        </div>
-                    </div>-->
-                    
+                    ?> 
                 </div>
             </div>
+            <!--Modal Editar-->
+            <div class="modal fade" id="editarServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Servicio</h5>
+                        <button type="button" id="close-arriba" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" align="center">
+                    <div class="my-5 mx-auto" style="width:60%;min-width:270px;">
+                            <h5 class="color-black"><b>Que desea modificar?</b></h5>
+                            <table>
+                            <tr>
+                                <td><input id="chk-modal-0" type="checkbox" name="chk-modal" class="mr-2" value="0">Categoria</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input id="chk-modal-1" type="checkbox" name="chk-modal" class="mr-2" value="1">Nombre de Servicio</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input id="chk-modal-2" type="checkbox" name="chk-modal" class="mr-2" value="2">Descripcion</td>
+                            </tr>
+                            <tr>
+                                <td><input id="chk-modal-3" type="checkbox" name="chk-modal" class="mr-2" value="3">Precio</td>
+                            </tr>
+                            <tr>
+                                <td><input id="chk-modal-4" type="checkbox" name="chk-modal" class="mr-2" value="4">Moneda</td>
+                            </tr>
+                            <tr>
+                                <td><input id="chk-modal-5" type="checkbox" name="chk-modal" class="mr-2" value="5">Imagen</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input id="chk-modal-6" type="checkbox" name="chk-modal" class="mr-2 mb-5" value="6">Disponibilidad de Servicio</td>
+                            </tr>
+                            <!--</table>-->
+                            <form id="id-form-edit" method="POST" action="../ajax/modificarServicio.php?accion=editar" onSubmit="return confirm('Seguro que desea cambiar datos del servicio?')" enctype="multipart/form-data">
+                            <!--<table>-->
+                            <tr style="display:none;">
+                                <td>IDServicio: <input type="text" name="IDservicio"></td>
+                            </tr>
+                            <tr id="fila-modal-0" style="display:none;">
+                                <td><label for="modal-categoria" class="color-black mr-1"><b>Categoria:</b></label></td>
+                                <td><select name="modal-categoria" class="form-control mb-4" >
+                                    <?php
+                                        $conexion = getPDO();
+                                        if($conexion){
+                                            $listcategoria = $conexion->query("SELECT ID_Categoria_Servicio,Nombre_Categoria FROM Categoria_Servicio");
+                                            while($filaCategoria=$listcategoria->fetch(PDO::FETCH_ASSOC)){
+                                                echo '<option value="'.$filaCategoria['ID_Categoria_Servicio'].'">'.$filaCategoria['Nombre_Categoria'].'</option>';
+                                            }
+                                        } else {
+                                            echo '<option value="">Hubo un problema con la conexión a la BD</option>';
+                                        }
+                                    ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr id="fila-modal-1" style="display:none;">
+                                <td><label for="modal-servicio" class="color-black mr-1"><b>Servicio:</b></label></td>
+                                <td><input name="modal-servicio" class="form-control mb-4" type="text" placeholder="Nombre Servicio" maxlength="90"></td>
+                            </tr>
+                            <tr id="fila-modal-2" style="display:none;">
+                                <td><label for="modal-descripcion" class="color-black mr-1"><b>Descripcion:</b></label></td>
+                                <td><textarea name="modal-descripcion" class="form-control mb-4" rows="5" maxlength="500"></textarea></td>
+                            </tr>  
+                            <tr id="fila-modal-3" style="display:none;">
+                                <td><label for="modal-precio" class="color-black mr-1"><b>Precio:</b></label></td>
+                                <td><input name="modal-precio" type="text" class="form-control mb-4" placeholder="Precio"></td>
+                            </tr>
+                            <tr id="fila-modal-4" style="display:none;">
+                                <td><label for="modal-moneda" class="color-black mr-1"><b>Moneda:</b></label></td>
+                                <td><select name="modal-moneda" class="form-control mb-4"><option value="Lps.">Lempira</option><option value="$">Dólar</option><option value="€">Euro</option></select></td>
+                            </tr>
+                            <tr id="fila-modal-5" style="display:none;">
+                                <td><label for="modal-imagen" class="color-black mr-1"><b>Imagen:</b></label></td>
+                                <td><input name="modal-imagen" type="file" class="form-control mb-4" accept="image/*"></td>
+                            </tr>
+                            <tr id="fila-modal-6" style="display:none;">
+                                <td colspan="2"><input type="checkbox" name="chk-disponible" class="mr-2"><b class="color-black">Servicio Disponible</b></td>
+                            </tr>
+                            
+                        
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button name="btn-update" class="btn btn-lg btn-primary" type="submit">Actualizar Servicio</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cerrar">Cerrar</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!---->
         </div>
         <div class="footer py-5 border-top text-center">
             <div class="container">
